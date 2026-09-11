@@ -14,5 +14,5 @@ endif()
 idf_component_register(
     SRCS "main.c" "${METHOD_SOURCE}"
     INCLUDE_DIRS "include"
-    REQUIRES esp_driver_gpio
+    REQUIRES esp_driver_gpio esp_timer
 )

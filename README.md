@@ -28,4 +28,4 @@ idf.py flash monitor
 Available values are `no_debounce`, `time_based`, `state_based`, `polling`,
 and `hardware_rc`.
 
-The last four are intentionally templates for now.
+`state_based`, `polling`, and `hardware_rc` are intentionally templates for now.
