@@ -8,10 +8,7 @@ static const char* TAG = "no_debounce";
 static volatile int click_count;
 static volatile bool button_pressed;
 
-static void button_isr_handler(void* arg) {
-  button_pressed = true;
-  click_count++;
-}
+static void button_isr_handler(void* arg) { button_pressed = true; }
 
 void button_method_init(void) {
   const gpio_config_t button_config = {
@@ -24,14 +21,15 @@ void button_method_init(void) {
 
   ESP_ERROR_CHECK(gpio_config(&button_config));
   ESP_ERROR_CHECK(gpio_install_isr_service(0));
-  ESP_ERROR_CHECK(
-      gpio_isr_handler_add(BUTTON_GPIO, button_isr_handler, NULL));
+  ESP_ERROR_CHECK(gpio_isr_handler_add(BUTTON_GPIO, button_isr_handler, NULL));
 
   ESP_LOGI(TAG, "Ready. GPIO %d, interrupt: falling edge", BUTTON_GPIO);
 }
 
 void button_method_run(void) {
   if (button_pressed) {
+    click_count++;
+
     ESP_LOGI(TAG, "Button pressed");
     ESP_LOGI(TAG, "Click count: %d", click_count);
     button_pressed = false;
